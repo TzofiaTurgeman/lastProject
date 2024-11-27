@@ -1,0 +1,6 @@
+{
+  "id": "INT PRIMARY KEY AUTO_INCREMENT",
+  "username": "VARCHAR(5000)",
+  "password": "INT",
+  "name1": "VARCHAR(5000)"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "INT PRIMARY KEY AUTO_INCREMENT",
+  "user_id": "INT",
+  "post_id": "INT",
+  "title": "VARCHAR(500)",
+  "body": "VARCHAR(5000)"
+}
