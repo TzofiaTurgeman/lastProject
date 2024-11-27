@@ -20,7 +20,7 @@ con.connect(function (err) {
 
 /* GET posts */
 router.get("/all", function async(req, res) {
-  var sql = `SELECT * FROM posts`;
+  var sql = `SELECT body ,title , username FROM posts JOIN users ON users.id=posts.user_id `;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("works(post)");

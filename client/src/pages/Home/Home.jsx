@@ -19,7 +19,7 @@ function Home() {
   const [commentsVisibility, setCommentsVisibility] = useState({});
   const [comments, setComments] = useState({});
   const [postsVisibility, setPostsVisibility] = useState({});
-  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [textInput, setTextInput] = useState("");
   const [commentsEditStatus, setCommentsEditStatus] = useState({});
@@ -74,7 +74,7 @@ function Home() {
       <div key={`post-${post.id}`} className="post-container">
         <div className="post-details">
           <h4>{post.title}</h4>
-          <h6>From: {post?.userName || "Unknown"}</h6>
+          <h6>From: {post?.username || "Unknown"}</h6>
           {postsVisibility[post.id] && <p>Body: {post.body}</p>}
           <p>Id: {post.id}</p>
           <button
