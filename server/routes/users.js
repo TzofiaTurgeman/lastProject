@@ -21,21 +21,29 @@ con.connect(function (err) {
 /* POST at login  */
 router.post("/", function (req, res, next) {
   try {
-    if (err) throw err;
     con.query(
-      `SELECT password FROM users where username="${req.body.username}"`
-    ),
-      function (err, result, fields) {
+      `SELECT id FROM users where username="${req.body.username}"`,
+      function (err, userIds, fields) {
         if (err) throw err;
+        const userId = userIds[0].id;
+        console.log("userId: ", userId);
 
-        if (result.password === req.body.password) {
-          res.status(200);
-          return res.send({ isValid: true });
-        } else {
-          res.status(400);
-          return res.send({ isValid: false });
-        }
-      };
+        con.query(
+          `SELECT password FROM password where users_id="${userId}"`,
+          function (err, passwordOfUser, fields) {
+            if (err) throw err;
+
+            if (passwordOfUser[0].password === req.body.password) {
+              res.status(200);
+              return res.send({ isValid: true });
+            } else {
+              res.status(400);
+              return res.send({ isValid: false });
+            }
+          }
+        );
+      }
+    );
   } catch (err) {
     console.error(err);
     return res.send(err);
@@ -45,12 +53,28 @@ router.post("/", function (req, res, next) {
 /* POST users */
 router.post("/add", function async(req, res) {
   console.log("Connected!");
-  var sql = `INSERT INTO users (username, password, name1) VALUES ("${req.body.username}", "${req.body.password}", "${req.body.name1}")`;
+  var sql = `INSERT INTO users (username, name1) VALUES ("${req.body.username}", "${req.body.name1}")`;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("works");
     return res.status(200).send("new user");
   });
+
+  con.query(
+    `SELECT id FROM users where username="${req.body.username}"`,
+    function (err, userIds, fields) {
+      if (err) throw err;
+      const userId = userIds[0].id;
+      console.log("userId: ", userId);
+
+      var sql2 = `INSERT INTO password (users_id, password) VALUES ("${userId}", "${req.body.password}")`;
+      con.query(sql2, function (err, result) {
+        if (err) throw err;
+        console.log("works add password");
+        return res.status(200).send("add password for new user");
+      });
+    }
+  );
 });
 
 // // delete user

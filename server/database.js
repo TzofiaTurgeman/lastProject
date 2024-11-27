@@ -16,7 +16,7 @@ const createTables = () => {
   let parsedFileContent;
   let stringForTableBuilding = "";
 
-  let tablesArr = ["comments", "posts", "todos", "users"];
+  let tablesArr = ["comments", "posts", "todos", "users", "password"];
   con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
