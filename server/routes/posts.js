@@ -18,9 +18,18 @@ con.connect(function (err) {
   console.log("Connected!");
 });
 
+/* GET posts */
+router.get("/all", function async(req, res) {
+  var sql = `SELECT * FROM posts`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("works(post)");
+    return res.status(200).send(result);
+  });
+});
+
 /* POST posts */
 router.post("/add", function async(req, res) {
-  console.log("Connected!");
   var sql = `INSERT INTO posts (user_id, title, body) VALUES ("${req.body.user_id}", "${req.body.title}", "${req.body.body}")`;
   con.query(sql, function (err, result) {
     if (err) throw err;

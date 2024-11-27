@@ -18,6 +18,16 @@ con.connect(function (err) {
   console.log("Connected!");
 });
 
+/* GET todos */
+router.get("/get", function async(req, res) {
+  var sql = `SELECT * FROM todos WHERE `;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("works(todo)");
+    return res.status(200).send(result);
+  });
+});
+
 /* POST todos */
 router.post("/add", function async(req, res) {
   console.log("Connected!");

@@ -18,6 +18,16 @@ con.connect(function (err) {
   console.log("Connected!");
 });
 
+/* GET comments */
+router.get("/get", function async(req, res) {
+  var sql = `SELECT * FROM comments`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("works(comments)");
+    return res.status(200).send(result);
+  });
+});
+
 /* POST comments */
 router.post("/add", function async(req, res) {
   console.log("Connected!");

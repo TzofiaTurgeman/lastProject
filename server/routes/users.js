@@ -25,17 +25,27 @@ router.post("/", function (req, res, next) {
       `SELECT id FROM users where username="${req.body.username}"`,
       function (err, userIds, fields) {
         if (err) throw err;
-        const userId = userIds[0].id;
+        const userId = userIds[0]?.id;
+        console.log("userId: ", userId);
+        if (!userId) return res.status(400).send({ isValid: false });
+
         console.log("userId: ", userId);
 
         con.query(
-          `SELECT password FROM password where users_id="${userId}"`,
+          `SELECT password FROM password where users_id=${userId}`,
           function (err, passwordOfUser, fields) {
+            console.log("passwordOfUser: ", passwordOfUser);
             if (err) throw err;
 
             if (passwordOfUser[0].password === req.body.password) {
-              res.status(200);
-              return res.send({ isValid: true });
+              // res.status(200);
+              var sql = `SELECT * FROM users WHERE username="${req.body.username}"`;
+              con.query(sql, function (err, result) {
+                if (err) throw err;
+                console.log("works");
+                return res.status(200).json(result);
+              });
+              // return res.send({ isValid: true,});
             } else {
               res.status(400);
               return res.send({ isValid: false });
