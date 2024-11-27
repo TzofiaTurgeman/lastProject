@@ -87,6 +87,27 @@ router.post("/add", function async(req, res) {
   );
 });
 
+/* GET all users */
+router.get("/all", function async(req, res) {
+  var sql = `SELECT * FROM users `;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("works(post)");
+    return res.status(200).send(result);
+  });
+});
+
+/* GET my users */
+router.get(`/all/:userid`, function async(req, res) {
+    const { userid } = req.params;
+    var sql = `SELECT * FROM users WHERE users.id=${userid} `;
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("works(post)");
+      return res.status(200).send(result);
+    });
+  });
+
 // // delete user
 // router.delete("/delete", function async(req, res) {
 //   var sql = `delete FROM users WHERE id=${req.body.id}`;

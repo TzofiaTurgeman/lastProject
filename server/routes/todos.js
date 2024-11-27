@@ -19,8 +19,9 @@ con.connect(function (err) {
 });
 
 /* GET todos */
-router.get("/get", function async(req, res) {
-  var sql = `SELECT * FROM todos WHERE `;
+router.get("/get/:userid", function async(req, res) {
+    const { userid } = req.params;
+  var sql = `SELECT * FROM todos WHERE todos.user_id=${userid}`;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("works(todo)");

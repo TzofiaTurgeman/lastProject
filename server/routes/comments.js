@@ -19,8 +19,9 @@ con.connect(function (err) {
 });
 
 /* GET comments */
-router.get("/get", function async(req, res) {
-  var sql = `SELECT * FROM comments`;
+router.get("/get/:postid", function async(req, res) {
+    const { postid } = req.params;
+  var sql = `SELECT * FROM comments WHERE comments.post_id=${postid}`;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("works(comments)");
