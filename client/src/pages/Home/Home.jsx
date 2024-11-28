@@ -1,12 +1,17 @@
 import { useContext, useState, useEffect } from "react";
 import { NavLink, useSearchParams, Outlet } from "react-router-dom";
 import "../../Home.css";
-
 import { CurrentUserContext } from "../../context/currentUser";
-import { getAllPosts, getComments } from "../../functions/getRequest";
+import {
+  getPosts,
+  getAllPosts,
+  getComments,
+  getUsers,
+} from "../../functions/getRequest";
 import { deleteComment } from "../../functions/deleteRequest";
 import { patchComment } from "../../functions/patchRequest";
 import { addComments } from "../../functions/postRequest";
+import Navbar from "../Navber/Navber";
 
 function Home() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -47,6 +52,8 @@ function Home() {
 
     getUsersPosts();
   }, []);
+
+  console.log("posts: ", posts);
 
   const displayedPosts = postsFilter
     ? posts.filter((post) =>
@@ -278,6 +285,9 @@ function Home() {
   return (
     <div>
       <h3 className="ViewPosts">View Posts:</h3>
+      <br />
+      <Navbar />
+      <br />
       <input
         className="search-home"
         placeholder="Search for posts..."

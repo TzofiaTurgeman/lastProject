@@ -2,7 +2,7 @@ export async function patchComment(id, updatedData) {
   const postOptions = {
     method: "PATCH",
     headers: {
-      "Content-Type": `http://localhost:3000/comments/${id}`,
+     "Content-Type": `application/json`,
     },
     body: JSON.stringify(updatedData),
   };
@@ -26,17 +26,16 @@ export async function patchTodo(id, updatedData) {
   const postOptions = {
     method: "PATCH",
     headers: {
-      "Content-Type": `http://localhost:3000/todos/${id}`,
+      "Content-Type": `application/json`,
     },
-    body: JSON.stringify(updatedData),
+    body: JSON.stringify( {key:"completed" ,nval:updatedData }),
   };
   try {
     const response = await fetch(
-      `http://localhost:3000/todos/${id}`,
+      `http://localhost:3000/todos/update/${id}`,
       postOptions
     );
     if (!response.ok) throw Error("Couldn't change the comment");
-
     const result = await response.json();
     return result;
   } catch (err) {

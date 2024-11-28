@@ -8,6 +8,7 @@ import { addComments, addPosts } from "../../functions/postRequest";
 import { patchComment } from "../../functions/patchRequest";
 import PostComments from "./PostComments";
 // import "../../posts.css";
+import Navbar from "../Navber/Navber";
 
 function Posts() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -301,6 +302,9 @@ function Posts() {
     <div className="postsContainer">
       <div className="postsBox">
         <h3 className="postsHeader">Your Posts:</h3>
+        <br/>
+        <Navbar/>
+        <br/>
         <input
           placeholder="Search for posts..."
           type="text"

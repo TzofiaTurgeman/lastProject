@@ -4,6 +4,7 @@ var router = express.Router();
 const mysql = require("mysql");
 const path = require("path");
 const fs = require("fs");
+const { title } = require("process");
 
 // connect
 const con = mysql.createConnection({
@@ -36,9 +37,8 @@ router.post("/add", function async(req, res) {
   var sql = `INSERT INTO todos (user_id, title, body, completed) VALUES ("${req.body.userId}", "${req.body.title}", "${req.body.body}", "${req.body.completed}")`;
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log('result: ', result);
     console.log("works(todo)");
-    return res.status(200).json({id: result.insertId});
+    return res.status(200).json({id: result.insertId, title: req.body.title,completed: req.body.completed});
   });
 });
 
@@ -48,21 +48,22 @@ router.delete("/", function async(req, res) {
   console.log(res.body);
   con.query(sql, function (err, result) {
     if (err) throw err;
-    return res.status(200).send("todo deleted / not exist ");
+    return res.status(200).json("todo deleted / not exist ");
   });
 });
 
 //update todo
-router.patch("/update", function async(req, res) {
-  var sql = `UPDATE todos SET ${req.body.key} = "${req.body.nval}"  WHERE id=${req.body.id}`;
+router.patch("/update/:id", function async(req, res) {
+  const { id } = req.params;
+  var sql = `UPDATE todos SET ${req.body.key} = "${req.body.nval.completed}"  WHERE id=${id}`;
   console.log(res.body);
   try {
     con.query(sql, function (err, result) {
       if (err) throw err;
-      return res.status(200).send("todos changed ");
+      return res.status(200).json("todos changed ");
     });
   } catch (error) {
-    res.send("there is an error");
+    res.json("there is an error");
   }
 });
 
