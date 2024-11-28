@@ -17,13 +17,10 @@ function Posts() {
   const [postsVisibility, setPostsVisibility] = useState({});
   const [commentsEditStatus, setCommentsEditStatus] = useState({});
   const [posts, setPosts] = useState([]);
-  console.log("posts: ", posts);
   const [textInput, setTextInput] = useState("");
   const [commentsNames, setCommentsNames] = useState({});
-  console.log("commentsNames: ", commentsNames);
   const [commentsBody, setCommentsBody] = useState({});
-  console.log("commentsBody: ", commentsBody);
-  const [postsEditStatus, setPhotosEditStatus] = useState({});
+  // const [postsEditStatus, setPhotosEditStatus] = useState({});
 
   const postsFilter = searchParams.get("title");
 
@@ -135,7 +132,6 @@ function Posts() {
               </button>
             }
             {comments[post.id].map((comment) => {
-              // console.log(comment);
               return (
                 <div
                   key={`comment-${comment.id}`}
@@ -175,7 +171,6 @@ function Posts() {
                   ) : (
                     <h5>Body: {commentsBody[comment.id]}</h5>
                   )}
-                  <p>Email: {comment.email}</p>
                   {
                     <button
                       onClick={() => handleDeleteComment(comment.id, post.id)}
@@ -183,7 +178,7 @@ function Posts() {
                       Delete comment
                     </button>
                   }
-                  {currentUser.email === comment.email &&
+                  {currentUser.id === comment.id && //?
                     !commentsEditStatus[comment.id] && (
                       <button
                         onClick={() => {
@@ -196,7 +191,7 @@ function Posts() {
                         Edit comment
                       </button>
                     )}
-                  {currentUser.email === comment.email &&
+                  {currentUser.id === comment.id && //?
                     commentsEditStatus[comment.id] && (
                       <button
                         onClick={() => {
@@ -240,13 +235,11 @@ function Posts() {
   async function handleAddComment(postId) {
     console.log(postId);
     const thisPostId = postId;
-    const thisEmail = currentUser.email;
     const commentName = prompt("Name");
     const commentBody = prompt("Body");
     try {
       const response = await addComments({
         postId: thisPostId,
-        email: thisEmail,
         name: commentName ? commentName : "",
         body: commentBody ? commentBody : "",
       });

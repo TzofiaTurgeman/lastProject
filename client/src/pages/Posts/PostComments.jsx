@@ -1,12 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 
 import { useOutletContext, useParams } from "react-router-dom";
-import {
-  getPosts,
-  getTodos,
-  getComments,
-  getUser,
-} from "../../functions/getRequest";
+import { getComments } from "../../functions/getRequest";
 
 function PostComments() {
   const { postId } = useParams();
@@ -28,17 +23,7 @@ function PostComments() {
     fetchComments();
   }, []);
 
-  return (
-    <div>
-      {/* {comments.map((comment) => {
-        <div className="comment-container">
-          <h5>{comment.name}</h5>
-          <p>{comment.body}</p>
-        </div>;
-      })} */}
-      hi
-    </div>
-  );
+  return <div></div>;
 }
 
 export default PostComments;

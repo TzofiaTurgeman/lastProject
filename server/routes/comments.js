@@ -20,7 +20,7 @@ con.connect(function (err) {
 
 /* GET comments */
 router.get("/get/:postid", function async(req, res) {
-    const { postid } = req.params;
+  const { postid } = req.params;
   var sql = `SELECT * FROM comments WHERE comments.post_id=${postid}`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -32,11 +32,11 @@ router.get("/get/:postid", function async(req, res) {
 /* POST comments */
 router.post("/add", function async(req, res) {
   console.log("Connected!");
-  var sql = `INSERT INTO comments (user_id, post_id, title, body) VALUES ("${req.body.user_id}","${req.body.post_id}", "${req.body.title}", "${req.body.body}")`;
+  var sql = `INSERT INTO comments (user_id, post_id, title, body) VALUES ("${req.body.userId}","${req.body.postId}", "${req.body.name}", "${req.body.body}")`;
   con.query(sql, function (err, result) {
-    if (err) throw err;
+    if (err) throw res.status(400).json({ message: ":(" });
     console.log("works(comment)");
-    return res.status(200).send("new comment");
+    return res.status(200).json({ id: result.insertId });
   });
 });
 

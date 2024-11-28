@@ -1,13 +1,12 @@
 // import { apiRequest } from "apiRequest";
-
-let API_URL = "http://localhost:3000/";
+// let API_URL = "http://localhost:3000/";
 
 export const addTodos = async (obj) => {
   const newTodos = {
     ...obj,
     completed: 0,
   };
-  console.log('newTodos: ', newTodos);
+  console.log("newTodos: ", newTodos);
 
   const postOptions = {
     method: "POST",
@@ -17,7 +16,10 @@ export const addTodos = async (obj) => {
     body: JSON.stringify(newTodos),
   };
   try {
-    const response = await fetch(`http://localhost:3000/todos/add`, postOptions);
+    const response = await fetch(
+      `http://localhost:3000/todos/add`,
+      postOptions
+    );
     if (!response.ok) throw Error("Couldn't add to-do item");
     const result = await response.json();
     return result;
@@ -34,7 +36,7 @@ export const addPosts = async (obj) => {
   const postOptions = {
     method: "POST",
     headers: {
-      "Content-Type": `http://localhost:3000/posts`,
+      "Content-Type": `application/json`,
     },
     body: JSON.stringify(newPosts),
   };
@@ -56,12 +58,15 @@ export const addComments = async (obj) => {
   const postOptions = {
     method: "POST",
     headers: {
-      "Content-Type": `http://localhost:3000/comments`,
+      "Content-Type": `application/json`,
     },
     body: JSON.stringify(newComment),
   };
   try {
-    const response = await fetch(`http://localhost:3000/comments`, postOptions);
+    const response = await fetch(
+      `http://localhost:3000/comments/add`,
+      postOptions
+    );
     if (!response.ok) throw Error("Couldn't add comment");
     const result = await response.json();
     console.log(result);

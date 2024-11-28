@@ -3,19 +3,13 @@ import { NavLink, useSearchParams, Outlet } from "react-router-dom";
 import "../../Home.css";
 
 import { CurrentUserContext } from "../../context/currentUser";
-import {
-  getPosts,
-  getAllPosts,
-  getComments,
-  getUsers,
-} from "../../functions/getRequest";
+import { getAllPosts, getComments } from "../../functions/getRequest";
 import { deleteComment } from "../../functions/deleteRequest";
 import { patchComment } from "../../functions/patchRequest";
 import { addComments } from "../../functions/postRequest";
 
 function Home() {
   let [searchParams, setSearchParams] = useSearchParams();
-
   const { currentUser } = useContext(CurrentUserContext);
   const [commentsVisibility, setCommentsVisibility] = useState({});
   const [comments, setComments] = useState({});
@@ -23,7 +17,6 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [textInput, setTextInput] = useState("");
   const [commentsEditStatus, setCommentsEditStatus] = useState({});
-
   const [commentsNames, setCommentsNames] = useState({});
   const [commentsBody, setCommentsBody] = useState({});
 
@@ -33,7 +26,6 @@ function Home() {
     async function getUsersPosts() {
       try {
         const response = await getAllPosts();
-        console.log(response);
         setPosts(response);
         setCommentsVisibility(
           response.reduce((acc, post) => {
@@ -56,8 +48,6 @@ function Home() {
     getUsersPosts();
   }, []);
 
-  console.log('posts: ', posts);
-  
   const displayedPosts = postsFilter
     ? posts.filter((post) =>
         post.title.toLowerCase().includes(textInput.toLowerCase())
@@ -65,7 +55,7 @@ function Home() {
     : posts;
 
   if (posts.length === 0) {
-    return <div>Loading...</div>;
+    return <div>issue showing posts, none exist</div>;
   }
 
   const postsElements = displayedPosts.map((post) => {
@@ -73,9 +63,9 @@ function Home() {
       <div key={`post-${post.id}`} className="post-container">
         <div className="post-details">
           <h4>{post.title}</h4>
-          <h6>From: {post?.username || "Unknown"}</h6>
-          {postsVisibility[post.id] && <p>Body: {post.body}</p>}
-          <p>Id: {post.id}</p>
+          <h6>From: {post?.username}</h6>
+          {postsVisibility[post.id] && <p>{post.body}</p>}
+          <p>{post.id}</p>
           <button
             onClick={() =>
               setPostsVisibility((prev) => ({
@@ -106,7 +96,7 @@ function Home() {
                 setCommentsNames((prev) => ({
                   ...prev,
                   ...thisComments.reduce((acc, comment) => {
-                    acc[comment.id] = comment.name;
+                    acc[comment.id] = comment.title;
                     return acc;
                   }, {}),
                 }));
@@ -152,9 +142,9 @@ function Home() {
                       />
                     </h5>
                   ) : (
-                    <h5>Name: {commentsNames[comment.id]}</h5>
+                    <h5>{commentsNames[comment.id]}</h5>
                   )}
-                  {commentsEditStatus[comment.id] ? (
+                  {/* {commentsEditStatus[comment.id] ? (
                     <h5>
                       Body:{" "}
                       <input
@@ -169,9 +159,10 @@ function Home() {
                       />
                     </h5>
                   ) : (
-                    <h5>Body: {commentsBody[comment.id]}</h5>
+                    <h5>{commentsBody[comment.id]}</h5>
                   )}
-                  <p>Email: {comment.email}</p>
+                  <p>{comment.id}</p>
+
                   {currentUser.id == post.userId && (
                     <button
                       onClick={() => handleDeleteComment(comment.id, post.id)}
@@ -179,7 +170,7 @@ function Home() {
                       Delete comment
                     </button>
                   )}
-                  {currentUser.email === comment.email &&
+                  {currentUser.id === comment.id &&
                     !commentsEditStatus[comment.id] && (
                       <button
                         onClick={() => {
@@ -192,7 +183,7 @@ function Home() {
                         Edit comment
                       </button>
                     )}
-                  {currentUser.email === comment.email &&
+                  {currentUser.id === comment.id &&
                     commentsEditStatus[comment.id] && (
                       <button
                         onClick={() => {
@@ -208,7 +199,7 @@ function Home() {
                       >
                         Save
                       </button>
-                    )}
+                    )} */}
                 </div>
               );
             })}
@@ -221,23 +212,32 @@ function Home() {
   async function handleAddComment(postId) {
     console.log(postId);
     const thisPostId = postId;
-    const thisEmail = currentUser.email;
     const commentName = prompt("Name");
     const commentBody = prompt("Body");
     try {
       const response = await addComments({
         postId: thisPostId,
-        email: thisEmail,
         name: commentName ? commentName : "",
         body: commentBody ? commentBody : "",
+        userId: currentUser.id,
       });
+      console.log("response: ", response);
 
       console.log(response);
-      console.log(commentsNames);
+      console.log(comments);
 
       setComments((prev) => ({
         ...prev,
-        [postId]: [...prev[postId], response],
+        [postId]: [
+          ...prev[postId],
+          {
+            id: response.id,
+            body: commentBody,
+            title: commentName,
+            user_id: currentUser.id,
+            post_id: postId,
+          },
+        ],
       }));
 
       setCommentsNames((prev) => ({
