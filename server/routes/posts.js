@@ -18,7 +18,7 @@ con.connect(function (err) {
   console.log("Connected!");
 });
 
-/* GET posts */
+/* GET all posts */
 router.get("/all", function async(req, res) {
   var sql = `SELECT body ,title , username FROM posts JOIN users ON users.id=posts.user_id `;
   con.query(sql, function (err, result) {
@@ -27,6 +27,18 @@ router.get("/all", function async(req, res) {
     return res.status(200).send(result);
   });
 });
+
+/* GET my posts */
+router.get(`/all/:userid`, function async(req, res) {
+    const { userid } = req.params;
+    var sql = `SELECT body ,title , username FROM posts JOIN users ON users.id=posts.user_id WHERE users.id=${userid} `;
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("works(post)");
+      return res.status(200).send(result);
+    });
+  });
+  
 
 /* POST posts */
 router.post("/add", function async(req, res) {
