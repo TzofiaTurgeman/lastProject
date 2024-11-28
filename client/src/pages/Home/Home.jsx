@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { NavLink, useSearchParams, Outlet } from "react-router-dom";
+import "../../Home.css";
 
 import { CurrentUserContext } from "../../context/currentUser";
 import {
@@ -19,7 +20,6 @@ function Home() {
   const [commentsVisibility, setCommentsVisibility] = useState({});
   const [comments, setComments] = useState({});
   const [postsVisibility, setPostsVisibility] = useState({});
-  // const [allUsers, setAllUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [textInput, setTextInput] = useState("");
   const [commentsEditStatus, setCommentsEditStatus] = useState({});
@@ -32,8 +32,6 @@ function Home() {
   useEffect(() => {
     async function getUsersPosts() {
       try {
-        // const responseUsers = await getUsers();
-        // setAllUsers(responseUsers);
         const response = await getAllPosts();
         console.log(response);
         setPosts(response);
@@ -68,7 +66,6 @@ function Home() {
     return <div>Loading...</div>;
   }
 
-  // comments[post.id][0].name
   const postsElements = displayedPosts.map((post) => {
     return (
       <div key={`post-${post.id}`} className="post-container">
@@ -92,7 +89,6 @@ function Home() {
             <button
               onClick={async () => {
                 const thisComments = await getComments(post.id);
-                // console.log(thisComments);
                 setComments((prev) => ({ ...prev, [post.id]: thisComments }));
                 setCommentsVisibility((prev) => ({
                   ...prev,
@@ -134,7 +130,6 @@ function Home() {
               </button>
             }
             {comments[post.id].map((comment) => {
-              // console.log(comment);
               return (
                 <div
                   key={`comment-${comment.id}`}

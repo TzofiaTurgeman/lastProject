@@ -1,0 +1,116 @@
+/* Import a custom font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif; /* Apply Roboto font to everything */
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%; /* Ensure the wrapper takes full width */
+  height: 100%; /* Ensure the wrapper takes full height */
+  background: #607274; /* Muted teal background */
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    145deg,
+    #ded0b6,
+    /* Light beige */ #b2a59b /* Grayish green */
+  ); /* Softer, earthy gradient */
+  padding: 2rem 4rem; /* Decreased vertical padding, increased horizontal padding */
+  width: 80%; /* Wider form */
+  max-width: 900px; /* Max width increased */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-height: 90vh; /* Max height to avoid overflow */
+  overflow-y: auto; /* Allow scrolling within the form if content is too large */
+}
+
+h1 {
+  color: #003366; /* Dark blue */
+  font-size: 2.5rem; /* Slightly smaller font size */
+  font-weight: bold; /* Bold text */
+  margin-bottom: 1.5rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  font-size: 1.5rem; /* Make the label text larger */
+  font-weight: 500; /* Slightly bold for emphasis */
+  color: #003366; /* Dark blue for contrast */
+  margin-bottom: 0.5rem; /* Add space between label and input */
+}
+
+input {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 2px solid #faeed1; /* Pale cream border */
+  border-radius: 8px;
+  font-size: 1.5rem; /* Larger font size for the input text */
+  color: #333; /* Dark text color */
+  background: transparent;
+  outline: none;
+  line-height: 1.2; /* Smaller line height */
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* Darker placeholder color */
+  font-size: 1.5rem; /* Larger placeholder font size */
+}
+
+input:focus {
+  border-color: #f1c40f; /* Soft golden yellow on focus */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+button {
+  background-color: #f1c40f; /* Soft yellow */
+  color: #003366; /* Dark blue text */
+  padding: 1.1rem;
+  font-size: 1.5rem; /* Larger button text */
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+  background-color: #e0a800; /* Slightly darker yellow on hover */
+}
+
+input,
+button {
+  width: 100%;
+}
+
+input:disabled,
+button:disabled {
+  background-color: #8c6e57; /* Muted color when disabled */
+  cursor: not-allowed;
+}
+
+form input,
+form button {
+  margin-bottom: 1rem; /* Spacing between elements */
+}

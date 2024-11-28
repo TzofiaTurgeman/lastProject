@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { CurrentUserContext } from "../../context/currentUser";
 import { loggingInUser } from "../../functions/postRequest";
 
-// import "../../register.css";
+import "../../login.css";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -14,12 +14,11 @@ function Login() {
 
     try {
       const res = await loggingInUser(username, parseInt(password));
-      console.log("res: ", res);
       localStorage.setItem("logedIn", JSON.stringify(res));
       setCurrentUser(res);
     } catch (err) {
-      console.error("Error fetching user data:", err);
-      alert("Error fetching user data");
+      console.error("error fetching user data:", err);
+      alert("error fetching user data");
     }
   }
 

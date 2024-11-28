@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+}
+
+.postsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #607274; /* Muted teal background */
+  padding-top: 80px; /* Added more space from top */
+  padding-bottom: 200px;
+}
+
+.postsBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #faeed1; /* Light cream color */
+  padding: 3rem;
+  width: 95%;
+  max-width: 1500px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.postsHeader {
+  font-size: 3rem; /* Much larger font for the header */
+  margin-bottom: 2rem;
+  color: #003366; /* Dark blue color */
+  margin-top: 40px; /* Added space before header */
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  border: 3px solid #bbb;
+  font-size: 1.2rem;
+}
+
+.All-posts-container {
+  display: grid; /* Using grid to organize the posts */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* Automatically creates 3 columns */
+  gap: 30px; /* Space between posts */
+  width: 100%;
+  margin-top: 20px; /* Space between the input field and posts */
+}
+
+.post-container {
+  background: #ded0b6; /* Light beige color */
+  padding: 2rem;
+  border-radius: 8px;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-bottom: 30px; /* Space after each post */
+}
+
+.post-container:hover {
+  transform: translateY(-10px); /* Slight hover effect */
+}
+
+.post-details h4 {
+  font-size: 2rem; /* Larger font size for the post title */
+  color: #003366; /* Dark blue color */
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.post-details p {
+  font-size: 1.2rem; /* Larger font for post body */
+  color: #4a4949;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.post-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 1rem;
+}
+
+.comment-container {
+  background: #b2a59b; /* Light brownish-gray color */
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.comment-container h5 {
+  font-size: 1.5rem; /* Larger font for comment title */
+  color: #211f1f;
+  margin-bottom: 0.5rem;
+}
+
+.comment-container p {
+  font-size: 1rem; /* Larger font for comment body */
+  color: #4a4949;
+}
+
+.comment-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 1rem 1.5rem;
+  background-color: #b2a59b; /* Soft brownish color for button */
+  color: #003366; /* Strong dark blue for text color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ded0b6; /* Light grayish yellow for hover effect */
+}
+
+button:disabled {
+  background-color: #8c6e57; /* Muted color when disabled */
+  cursor: not-allowed;
+}
+
+h3 {
+  padding-top: 7%;
+  font-size: 2rem;
+  color: #003366; /* Dark blue for the header */
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 2px solid #607274; /* Dark teal border for the input */
+  font-size: 1.1rem;
+  color: #333; /* Dark text color */
+  background: transparent;
+}
+
+input[type="text"]::placeholder {
+  color: #4a4949; /* Darker placeholder color */
+}
+
+input[type="text"]:focus {
+  border-color: #f1c40f; /* Soft golden yellow on focus */
+  background-color: rgba(255, 255, 255, 0.1);
+}
