@@ -108,7 +108,7 @@ function Todos() {
     const toDosToShowOnScreen = [];
     todos.forEach((todo) => {
       toDosToShowOnScreen.push(
-        <li>
+        <li style={{borderRadius:"10px",padding:"5px",margin:"10px", background:"#e5d4c7"}}>
           <span>{todo.id}</span>
           <input
             type="text"
@@ -123,6 +123,7 @@ function Todos() {
             }
           />
           <button onClick={() => functionToDeleteTodo(todo.id)}>Delete</button>
+          <br/> <br/>
         </li>
       );
     });

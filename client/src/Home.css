@@ -13,7 +13,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background: #607274; /* Muted teal background */
+  /* background: #607274; Muted teal background */
   padding-top: 80px; /* Added more space from top */
   padding-bottom: 200px;
 }
@@ -22,7 +22,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #faeed1; /* Light cream color */
   padding: 3rem;
   width: 95%;
   max-width: 1500px;

@@ -149,9 +149,9 @@ function Home() {
                       />
                     </h5>
                   ) : (
-                    <h5>{commentsNames[comment.id]}</h5>
+                    <h5> Name:{" "}{commentsNames[comment.id]}</h5>
                   )}
-                  {/* {commentsEditStatus[comment.id] ? (
+                   {commentsEditStatus[comment.id] ? (
                     <h5>
                       Body:{" "}
                       <input
@@ -168,7 +168,7 @@ function Home() {
                   ) : (
                     <h5>{commentsBody[comment.id]}</h5>
                   )}
-                  <p>{comment.id}</p>
+                  {/*<p>{comment.id}</p>
 
                   {currentUser.id == post.userId && (
                     <button
@@ -261,20 +261,20 @@ function Home() {
     }
   }
 
-  async function handleDeleteComment(commentId, postId) {
-    console.log(commentId);
-    try {
-      const response = deleteComment(commentId);
-      console.log(comments);
-      setComments((prev) => ({
-        ...prev,
-        [postId]: prev[postId].filter((comment) => comment.id !== commentId),
-      }));
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-  }
+  // async function handleDeleteComment(commentId, postId) {
+  //   console.log(commentId);
+  //   try {
+  //     const response = deleteComment(commentId);
+  //     console.log(comments);
+  //     setComments((prev) => ({
+  //       ...prev,
+  //       [postId]: prev[postId].filter((comment) => comment.id !== commentId),
+  //     }));
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert(err.message);
+  //   }
+  // }
 
   function handleInputChange(e) {
     const newTextInput = e.target.value;

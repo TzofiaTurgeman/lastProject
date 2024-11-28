@@ -1,7 +1,12 @@
+
+
 export async function deleteComment(commentId) {
   const postOptions = {
     method: "DELETE",
-    body: `id=${commentId}`,
+    headers: {
+      "Content-Type": `application/json`,
+    },
+    body: JSON.stringify({id: commentId}),
   };
 
   try {
@@ -45,10 +50,14 @@ export async function deleteTodos(id) {
   }
 }
 
-export async function deletePost(id) {
+export async function deletePost(pid) {
+  console.log('pid: ', pid);
   const postOptions = {
     method: "DELETE",
-    body: `id=${id}`,
+    headers: {
+      "Content-Type": `application/json`,
+    },
+    body: JSON.stringify({id: pid}),
   };
 
   try {

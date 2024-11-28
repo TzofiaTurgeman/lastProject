@@ -32,7 +32,7 @@ router.get("/all", function async(req, res) {
 router.get(`/all/:userid`, function async(req, res) {
     const { userid } = req.params;
     console.log('userid: ', userid);
-    var sql = `SELECT posts.id, users.id, body ,title , username FROM posts JOIN users ON users.id=posts.user_id WHERE users.id=${userid} `;
+    var sql = `SELECT posts.id , users.id as user_id, body ,title , username FROM posts JOIN users ON users.id=posts.user_id WHERE users.id=${userid} `;
     con.query(sql, function (err, result) {
       if (err) throw err;
       console.log("works(post)");
@@ -57,7 +57,7 @@ router.delete("/delete", function async(req, res) {
   console.log(res.body);
   con.query(sql, function (err, result) {
     if (err) throw err;
-    return res.status(200).send("post deleted / not exist ");
+    return res.status(200).json("post deleted / not exist ");
   });
 });
 
@@ -68,10 +68,10 @@ router.patch("/update", function async(req, res) {
   try {
     con.query(sql, function (err, result) {
       if (err) throw err;
-      return res.status(200).send("posts changed ");
+      return res.status(200).json("posts changed ");
     });
   } catch (error) {
-    res.send("there is an error");
+    res.json("there is an error");
   }
 });
 

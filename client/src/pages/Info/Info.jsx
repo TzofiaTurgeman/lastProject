@@ -9,13 +9,13 @@ function Info() {
   return (
     <div className="profileContainer">
       <div className="profileBox">
-        <div className="profileHeader">info</div>
-        <br/>
+      <h3 className="postsHeader">Info:</h3>
+      <br/>
         <Navbar/>
         <br/>
-        <div className="profileField ">id: {currentUser.id}</div>
-        <div className="profileField ">username: {currentUser.username}</div>
-        <div className="profileField">name: {currentUser.name1}</div>
+        <div style={{fontSize:"23px"}} className="profileField ">id: {currentUser.id}</div>
+        <div style={{fontSize:"23px"}} className="profileField ">username: {currentUser.username}</div>
+        <div style={{fontSize:"23px"}} className="profileField">name: {currentUser.name1}</div>
       </div>
     </div>
   );

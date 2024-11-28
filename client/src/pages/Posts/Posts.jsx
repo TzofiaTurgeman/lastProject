@@ -3,10 +3,10 @@ import { NavLink, useSearchParams, Outlet } from "react-router-dom";
 
 import { CurrentUserContext } from "../../context/currentUser";
 import { getPosts, getComments } from "../../functions/getRequest";
-import { deleteComment } from "../../functions/deleteRequest";
+import { deleteComment,deletePost } from "../../functions/deleteRequest";
 import { addComments, addPosts } from "../../functions/postRequest";
-import { patchComment } from "../../functions/patchRequest";
-import PostComments from "./PostComments";
+// import { patchComment } from "../../functions/patchRequest";
+// import PostComments from "./PostComments";
 // import "../../posts.css";
 import Navbar from "../Navber/Navber";
 
@@ -191,8 +191,8 @@ function Posts() {
                       >
                         Edit comment
                       </button>
-                    )}
-                  {currentUser.id === comment.id && //?
+                    )} 
+                  {/* {currentUser.id === comment.id && //?
                     commentsEditStatus[comment.id] && (
                       <button
                         onClick={() => {
@@ -208,7 +208,7 @@ function Posts() {
                       >
                         Save
                       </button>
-                    )}
+                    )} */}
                 </div>
               );
             })}
@@ -222,9 +222,10 @@ function Posts() {
 
   async function handleDeletePost(postId) {
     console.log(postId);
+    console.log('postId: ', postId);
     try {
       console.log(posts);
-      const response = deleteComment(postId);
+      const response = deletePost(postId);
       console.log(response);
       setPosts((prev) => prev.filter((post) => post.id !== postId));
     } catch (err) {

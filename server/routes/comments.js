@@ -42,11 +42,12 @@ router.post("/add", function async(req, res) {
 
 //delete comment
 router.delete("/delete", function async(req, res) {
+  console.log('req.body: ', req.body);
   var sql = `delete FROM comments WHERE id=${req.body.id}`;
   console.log(res.body);
   con.query(sql, function (err, result) {
     if (err) throw err;
-    return res.status(200).send("comments deleted / not exist ");
+    return res.status(200).json({});
   });
 });
 
