@@ -23,12 +23,15 @@ export async function deleteComment(commentId) {
 export async function deleteTodos(id) {
   const postOptions = {
     method: "DELETE",
-    body: `id=${id}`,
+    body: JSON.stringify({ id }),
+    headers: {
+      "Content-Type": `application/json`,
+    },
   };
 
   try {
     const response = await fetch(
-      `http://localhost:3000/todos/delete`,
+      `http://localhost:3000/todos/`,
       postOptions
     );
     if (!response.ok) {

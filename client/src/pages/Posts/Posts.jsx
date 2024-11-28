@@ -50,7 +50,6 @@ function Posts() {
         alert(err.message);
       }
     }
-
     getUsersPosts();
   }, []);
 

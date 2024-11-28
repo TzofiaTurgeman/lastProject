@@ -31,17 +31,19 @@ router.get("/get/:userid", function async(req, res) {
 
 /* POST todos */
 router.post("/add", function async(req, res) {
+  console.log('req: ', req.body);
   console.log("Connected!");
-  var sql = `INSERT INTO todos (user_id, title, body, completed) VALUES ("${req.body.user_id}", "${req.body.title}", "${req.body.body}", "${req.body.completed}")`;
+  var sql = `INSERT INTO todos (user_id, title, body, completed) VALUES ("${req.body.userId}", "${req.body.title}", "${req.body.body}", "${req.body.completed}")`;
   con.query(sql, function (err, result) {
     if (err) throw err;
+    console.log('result: ', result);
     console.log("works(todo)");
-    return res.status(200).send("new todo");
+    return res.status(200).json({id: result.insertId});
   });
 });
 
 // delete todo
-router.delete("/delete", function async(req, res) {
+router.delete("/", function async(req, res) {
   var sql = `delete FROM todos WHERE id=${req.body.id}`;
   console.log(res.body);
   con.query(sql, function (err, result) {

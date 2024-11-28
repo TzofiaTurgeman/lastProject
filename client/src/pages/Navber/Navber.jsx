@@ -16,11 +16,12 @@ function Navbar() {
   const posts = () => {
     navigate(`/${currentUser.id}/posts`);
   };
-  const albums = () => {
-    navigate(`/${currentUser.id}/albums`);
+  const home = () => {
+    navigate(`/`);
   };
   const logout = () => {
-    localStorage.setItem("currentUser", JSON.stringify(null));
+    // localStorage.setItem("currentUser", JSON.stringify(null));
+    localStorage.setItem("logedIn", JSON.stringify(null));
     navigate("/", { replace: true });
     history.pushState(null, null, "/");
     window.onpopstate = function () {
@@ -30,10 +31,10 @@ function Navbar() {
 
   return (
     <>
+      <button onClick={() => home()}>home</button>
       <button onClick={() => todos()}> todos </button>
       <button onClick={() => info()}> info </button>
       <button onClick={() => posts()}> posts </button>
-      <button onClick={() => albums()}> albums </button>
       <button onClick={() => logout()}> logout </button>
     </>
   );

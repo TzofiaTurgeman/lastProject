@@ -55,7 +55,9 @@ export async function getComments(postId) {
 }
 
 export async function getTodos(userId) {
+  console.log('userIdingetreq: ', userId);
   try {
+
     const request = await fetch(`http://localhost:3000/todos/get/${userId}`);
     if (!request.ok) throw Error("Did not get expected data");
     const requestJson = await request.json();

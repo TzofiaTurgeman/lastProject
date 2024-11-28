@@ -19,9 +19,9 @@ function App() {
         {currentUser ? (
           <>
             <Route path="/" element={<Home />} />
-            <Route path="info" element={<Info />} />
-            <Route path="posts" element={<Posts />} />
-            <Route path="todos" element={<Todos />} />
+            <Route path="/info" element={<Info />} />
+            <Route path="/posts" element={<Posts />} />
+            <Route path="/todos" element={<Todos />} />
           </>
         ) : (
           <Route path="/" element={<Login />} />

@@ -56,6 +56,8 @@ function Home() {
     getUsersPosts();
   }, []);
 
+  console.log('posts: ', posts);
+  
   const displayedPosts = postsFilter
     ? posts.filter((post) =>
         post.title.toLowerCase().includes(textInput.toLowerCase())

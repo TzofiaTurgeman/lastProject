@@ -8,15 +8,16 @@ import { addTodos } from "../../functions/postRequest";
 
 function Todos() {
   const { currentUser } = useContext(CurrentUserContext);
+  console.log('currentUser: ', currentUser);
   const [todos, setTodos] = useState([]); //todos will be in array
   const [newTodoName, setNewTodoName] = useState("");
-  const [orderCriteria, setOrderCriteria] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
 
   // get users todos from db
   useEffect(() => {
     async function fetchTodos() {
       try {
+        console.log('currentUser: ', currentUser);
+        console.log('currentUser.id: ', currentUser.id);
         const usersToDosInDB = await getTodos(currentUser.id); //returns array
         console.log("usersToDosInDB: ", usersToDosInDB);
         setTodos(usersToDosInDB);
@@ -100,38 +101,9 @@ function Todos() {
 
   // sort by criteria
   const sortedTodos = [...todos];
-  switch (orderCriteria) {
-    case "id":
+ 
       sortedTodos.sort((todoA, todoB) => todoA.id - todoB.id); //todoA.id<todoB.id (-), todoA before todoB
-      break;
-    case "alphabetical":
-      sortedTodos.sort((todoA, todoB) =>
-        todoA.title.localeCompare(todoB.title)
-      );
-      break;
-    case "completed":
-      sortedTodos.sort((a, b) => a.completed - b.completed); //false (0) before true (1). incomplete before completed
-      break;
-    case "random":
-      sortedTodos.sort(() => Math.floor(Math.random()));
-      break;
-    default:
-      break;
-  }
-
-  // filter todos based on search
-  const lowercaseSearchTerm = searchTerm.toLowerCase();
-  const filteredTodos = sortedTodos.filter((todo) => {
-    return (
-      todo.title.toLowerCase().includes(lowercaseSearchTerm) || //title includes?
-      `${todo.id}`.includes(searchTerm) || //id to string, does it include?
-      (searchTerm === "completed"
-        ? todo.completed
-        : searchTerm === "not completed"
-        ? !todo.completed
-        : false) //
-    );
-  });
+ 
 
   //rendering
   function renderTodoItems(todos) {
@@ -172,28 +144,8 @@ function Todos() {
         />
         <button onClick={functionToAddTodo}>Add Todo</button>
 
-        {/* Search */}
-        <input
-          type="text"
-          placeholder="Search by ID/title/completion"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="inputField"
-        />
-
-        {/* Sort */}
-        <select
-          onChange={(e) => setOrderCriteria(e.target.value)}
-          value={orderCriteria}
-          className="selectField"
-        >
-          <option value="id">sort by ID</option>
-          <option value="alphabetical">a-z</option>
-          <option value="completed">sort by completion</option>
-          <option value="random">shuffle</option>
-        </select>
-
         {/* Todos List */}
-        <ul className="todosList">{renderTodoItems(filteredTodos)}</ul>
+        <ul className="todosList">{renderTodoItems(todos)}</ul>
       </div>
     </div>
   );

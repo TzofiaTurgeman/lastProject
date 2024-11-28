@@ -43,7 +43,7 @@ router.post("/", function (req, res, next) {
               con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log("works");
-                return res.status(200).json(result);
+                return res.status(200).json(result[0]);
               });
               // return res.send({ isValid: true,});
             } else {

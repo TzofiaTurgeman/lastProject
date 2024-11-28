@@ -20,7 +20,7 @@ con.connect(function (err) {
 
 /* GET all posts */
 router.get("/all", function async(req, res) {
-  var sql = `SELECT body ,title , username FROM posts JOIN users ON users.id=posts.user_id `;
+  var sql = `SELECT posts.id, body ,title , username FROM posts JOIN users ON users.id=posts.user_id `;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("works(post)");
@@ -31,7 +31,8 @@ router.get("/all", function async(req, res) {
 /* GET my posts */
 router.get(`/all/:userid`, function async(req, res) {
     const { userid } = req.params;
-    var sql = `SELECT body ,title , username FROM posts JOIN users ON users.id=posts.user_id WHERE users.id=${userid} `;
+    console.log('userid: ', userid);
+    var sql = `SELECT posts.id, users.id, body ,title , username FROM posts JOIN users ON users.id=posts.user_id WHERE users.id=${userid} `;
     con.query(sql, function (err, result) {
       if (err) throw err;
       console.log("works(post)");

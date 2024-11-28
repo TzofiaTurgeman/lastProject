@@ -14,8 +14,8 @@ function Login() {
 
     try {
       const res = await loggingInUser(username, parseInt(password));
-      localStorage.setItem("logedIn", JSON.stringify(res));
-      setCurrentUser(res);
+      console.log('res: ', res);
+      if(res) setCurrentUser(res);
     } catch (err) {
       console.error("error fetching user data:", err);
       alert("error fetching user data");
