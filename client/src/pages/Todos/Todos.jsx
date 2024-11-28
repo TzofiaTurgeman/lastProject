@@ -8,7 +8,6 @@ import { addTodos } from "../../functions/postRequest";
 
 function Todos() {
   const { currentUser } = useContext(CurrentUserContext);
-  console.log('currentUser: ', currentUser);
   const [todos, setTodos] = useState([]); //todos will be in array
   const [newTodoName, setNewTodoName] = useState("");
 
@@ -16,10 +15,7 @@ function Todos() {
   useEffect(() => {
     async function fetchTodos() {
       try {
-        console.log('currentUser: ', currentUser);
-        console.log('currentUser.id: ', currentUser.id);
         const usersToDosInDB = await getTodos(currentUser.id); //returns array
-        console.log("usersToDosInDB: ", usersToDosInDB);
         setTodos(usersToDosInDB);
       } catch (error) {
         console.error("failed to fetch todos:", error);
@@ -35,7 +31,6 @@ function Todos() {
     }
     try {
       const newTodo = await addTodos({
-        //the function gets an object
         userId: currentUser.id,
         title: newTodoName,
       });
@@ -83,7 +78,9 @@ function Todos() {
   // change completion
   const functionToChangeCompletionStatus = async (id, completed) => {
     try {
-      const newCompletionStatus = !completed;
+      let newCompletionStatus =0;
+      if(completed==0) newCompletionStatus=1;
+      else newCompletionStatus=0;
       await patchTodo(id, { completed: newCompletionStatus });
       // new array of todos with the updated
       const updatedTodos = todos.map((todo) => {
