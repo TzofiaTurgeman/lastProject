@@ -5,6 +5,7 @@ import { deleteTodos } from "../../functions/deleteRequest";
 import { patchTodo } from "../../functions/patchRequest";
 import { addTodos } from "../../functions/postRequest";
 // import "../../Todos.css";
+import Navbar from "../Navber/Navber";
 
 function Todos() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -132,6 +133,10 @@ function Todos() {
     <div className="todosContainer">
       <div className="todosBox">
         {/* Add */}
+        <h3 className="ViewPosts">View Todos:</h3>
+          <br/>
+        <Navbar/>
+        <br/>
         <input
           type="text"
           value={newTodoName}

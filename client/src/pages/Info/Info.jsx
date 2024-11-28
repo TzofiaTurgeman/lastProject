@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CurrentUserContext } from "../../context/currentUser";
 // import "../../info.css";
+import Navbar from "../Navber/Navber";
 
 function Info() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -9,8 +10,12 @@ function Info() {
     <div className="profileContainer">
       <div className="profileBox">
         <div className="profileHeader">info</div>
-        <div className="profileField ">{currentUser.username}</div>
-        <div className="profileField">{currentUser.name}</div>
+        <br/>
+        <Navbar/>
+        <br/>
+        <div className="profileField ">id: {currentUser.id}</div>
+        <div className="profileField ">username: {currentUser.username}</div>
+        <div className="profileField">name: {currentUser.name1}</div>
       </div>
     </div>
   );
